@@ -1,0 +1,107 @@
+/*
+ * Toggle button variables
+ */
+$background-on:     #61B136;
+$background-off:    #FF5335;
+
+$border-radius:     2rem;
+
+$icon-bg:           #fff;
+
+$height:            50px;
+$width-on:         220px;
+$width-off:        200px;
+
+
+/*
+ * Toggle button styles
+ */
+.toggle-button {
+
+    position: relative;
+    color: #fff;
+    
+    label {
+        display: inline-block;
+        height: $height;
+        line-height: $height;
+        border-radius: $border-radius;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s;
+        
+        &:before,
+        &:after {
+            position: absolute;
+            right: 2rem;
+            transition: all 0.2s;
+        }
+
+        &:before {
+            content:attr(data-on-text);
+        }
+        &:after {
+            content:attr(data-off-text);
+        }
+    }
+
+    input[type=checkbox] + label {
+        width: $width-off;
+        background: $background-off;
+        
+        &:before {
+            opacity: 0;
+            transform: translate(0, 20px);
+        }
+        &:after {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+    }
+
+    input[type=checkbox]:checked + label {
+        width: $width-on;
+        background: $background-on;
+
+        &:before {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+        &:after {
+            opacity: 0;
+            transform: translate(0, -20px);
+        }
+
+    }
+
+    input[type=checkbox] {
+        position: absolute;
+        top: calc(38%);
+        left: 1rem;
+        visibility: hidden;
+
+        &:before,
+        &:after {
+            position: absolute;
+            content: "";
+            visibility: visible;
+            width: $height/2;
+            height: 3px;
+            border-radius: 3px;
+            background: $icon-bg;
+            transition: 0.3s ease-out;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+        &:after  {
+            transform: rotate(-45deg);
+        }
+
+        &:checked:before {
+            transform: translate(-12px, 5px) rotate(45deg) scale(0.5, 1);
+        }
+        
+    }
+}
